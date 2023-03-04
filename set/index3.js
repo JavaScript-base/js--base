@@ -38,7 +38,7 @@ class Myset {
     }
 
     clear() {
-        this._data = [];
+        this._data.length = 0;
     }
 
     isEqual(data1, data2) {
@@ -48,6 +48,18 @@ class Myset {
             return Object.is(data1, data2)
         }
     }
+
+    *[Symbol.iterator]() {
+        for (const item of this._data) {
+            yield item;
+        }
+    }
+
+    forEach(callback) {
+        for (const item of this._data) {
+            callback(item, item, this)
+        }
+    }
 }
 
 const ddd = new Myset([222, '121', 1,2,3,4,5,4,5]);
@@ -55,3 +67,6 @@ console.log(ddd);
 
 console.log(ddd, ddd.delete('123'));
 console.log(ddd, ddd.delete('121'));
+
+ddd.clear();
+console.log(ddd);

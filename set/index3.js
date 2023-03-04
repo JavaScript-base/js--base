@@ -11,8 +11,12 @@ class Myset {
         for (const item of iterator) {
             this.add(item);
         }
+        Object.defineProperty(this, 'size', {
+            get() {
+                return this._data.length;
+            }
+        })
     }
-
     add(data) {
         if(!this.has(data)) {
             this._data.push(data);
@@ -39,6 +43,10 @@ class Myset {
 
     clear() {
         this._data.length = 0;
+    }
+
+    size() {
+        return this._data.length;
     }
 
     isEqual(data1, data2) {
@@ -68,5 +76,6 @@ console.log(ddd);
 console.log(ddd, ddd.delete('123'));
 console.log(ddd, ddd.delete('121'));
 
-ddd.clear();
-console.log(ddd);
+// ddd.clear();
+ddd.delete(1)
+console.log(ddd.size);
